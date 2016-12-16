@@ -5,6 +5,7 @@ const authParser = require('express-auth-parser');
 const auth = require('./auth');
 const users = require('./users');
 const expenses = require('./expenses');
+const me = require('./me');
 const PORT = 1337;
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(authParser);
 app.use('/auth', auth);
 app.use('/users', users);
 app.use('/expenses', expenses);
+app.use('/me', me);
 app.use('/app', express.static(path.join(__dirname, '../app')));
 
 app.listen(PORT, function () {

@@ -1,15 +1,16 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 export default class Expense extends React.Component {
   render() {
-    const {timestamp, description, amount, comment, onDelete} = this.props;
+    const {id, timestamp, description, amount, comment, onDelete} = this.props;
     return <tr>
       <td>{timestamp}</td>
       <td>{amount}</td>
       <td>{description}</td>
       <td>{comment}</td>
       <td>
-        <button className="btn btn-xs btn-warning">Edit</button>
+        <Link className="btn btn-xs btn-warning" to={`/expenses/${id}/edit`}>Edit</Link>
         <button className="btn btn-xs btn-danger" onClick={onDelete}>Delete</button>
       </td>
     </tr>

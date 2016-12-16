@@ -1,9 +1,9 @@
-import {getExpenses, postExpenses, deleteExpense} from './utils/api_client';
+import {getExpenses, postExpenses, deleteExpense, putExpense, getExpense} from './utils/api_client';
 
-export function getAllExpenses() {
+export function getAllExpenses(options) {
   return {
     type: 'GET_EXPENSES',
-    payload: getExpenses()
+    payload: getExpenses(options)
   };
 }
 
@@ -14,10 +14,25 @@ export function newExpense(data) {
   };
 }
 
-export function removeExpense(id) {
+export function removeExpense(id, view) {
   return {
     type: 'REMOVE_EXPENSE',
     payload: deleteExpense(id)
-      .then(getExpenses)
+      .then(() => getExpenses({view}))
+  };
+}
+
+export function updateExpense(expense) {
+  return {
+    type: 'UPDATE_CURRENT_EXPENSE',
+    payload: putExpense(expense)
+      .then(() => getExpense(expense.id))
+  }
+}
+
+export function getCurrentExpense(id) {
+  return {
+    type: 'GET_CURRENT_EXPENSE',
+    payload: getExpense(id)
   };
 }

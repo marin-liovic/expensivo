@@ -9,6 +9,9 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 import Expenses from './pages/expenses'
 import NewExpense from './pages/new_expense';
+import EditExpense from './pages/edit_expense';
+import Users from './pages/users';
+import EditUser from './pages/edit_user';
 
 const app = document.getElementById('app');
 
@@ -21,6 +24,9 @@ ReactDOM.render(
       <Route path="/login" component={Login}></Route>
       <Route path="/expenses" component={Expenses}></Route>
       <Route path="/expenses/new" component={NewExpense}></Route>
+      <Route path="/expenses/:id/edit" component={EditExpense}></Route>
+      <Route path="/users" component={Users}></Route>
+      <Route path="/users/:id/edit" component={EditUser}></Route>
     </Route>
   </Router>
   </Provider>

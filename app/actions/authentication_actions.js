@@ -1,4 +1,4 @@
-import {postUsers, postAuthAccessToken} from './utils/api_client';
+import {postUsers, postAuthAccessToken, getMe} from './utils/api_client';
 
 export function signup(data) {
   return {
@@ -7,6 +7,10 @@ export function signup(data) {
       .then(() => {
         return postAuthAccessToken(data);
       })
+      .then((token) => {
+        sessionStorage.setItem('token', token);
+        return getMe();
+      })
   };
 }
 
@@ -14,5 +18,9 @@ export function login(data) {
   return {
     type: 'LOGIN',
     payload: postAuthAccessToken(data)
+      .then((token) => {
+        sessionStorage.setItem('token', token);
+        return getMe();
+      })
   };
 }

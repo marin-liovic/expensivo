@@ -1,9 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {newExpense} from '../../actions/expenses_actions';
+import {updateExpense, getCurrentExpense} from '../../actions/expenses_actions';
 
-@connect(() => {return {};})
-export default class NewExpense extends React.Component {
+@connect((store) => {
+  return {
+    currentExpense: store.currentExpense
+  };
+})
+export default class EditExpense extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +21,14 @@ export default class NewExpense extends React.Component {
     this.changeDescription = this.changeDescription.bind(this);
     this.changeComment = this.changeComment.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getCurrentExpense(this.props.params.id));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps.currentExpense.item);
   }
 
   changeTimestamp(event) {
@@ -36,12 +48,13 @@ export default class NewExpense extends React.Component {
   }
 
   handleSubmit() {
-    this.props.dispatch(newExpense(this.state));
+    const expense = {...this.state, id: this.props.currentExpense.item.id};
+    this.props.dispatch(updateExpense(expense));
   }
-  
+
   render() {
     return <div className="col-lg-4 col-lg-offset-4">
-      <h1>New Expense</h1>
+      <h1>Update Expense</h1>
       <form onSubmit={this.handleSubmit}>
         <label className="sr-only">Time</label>
         <input type="datetime" value={this.state.timestamp} onChange={this.changeTimestamp} className="form-control" placeholder="Time" required='true'/>
@@ -51,7 +64,7 @@ export default class NewExpense extends React.Component {
         <input type="text" value={this.state.description} onChange={this.changeDescription} className="form-control" placeholder="Description" required='true'/>
         <label className="sr-only">Comment</label>
         <input type="text" value={this.state.comment} onChange={this.changeComment} className="form-control" placeholder="Comment"/>
-        <button className="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+        <button className="btn btn-lg btn-primary btn-block" type="submit">Update</button>
       </form>
     </div>
   }

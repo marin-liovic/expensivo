@@ -1,12 +1,15 @@
-export default function authenticationReducer(state = {}, action) {
+const initialState = {
+  isAuthenticated: false,
+  me: {}
+};
+
+export default function authenticationReducer(state = initialState, action) {
   switch (action.type) {
     case 'SIGNUP_FULFILLED':
-      sessionStorage.setItem('token', action.payload);
-      state = {isAuthenticated: true};
+      state = {...state, isAuthenticated: true, me: action.payload};
       break;
     case 'LOGIN_FULFILLED':
-      sessionStorage.setItem('token', action.payload);
-      state = {isAuthenticated: true};
+      state = {...state, isAuthenticated: true, me: action.payload};
       break;
   }
   return state;

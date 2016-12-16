@@ -11,7 +11,8 @@ import Footer from './footer';
 })
 export default class Layout extends React.Component {
   render() {
-    const header = this.props.authentication.isAuthenticated ? <Header /> : undefined;
+    const {isAuthenticated, me} = this.props.authentication;
+    const header = isAuthenticated ? <Header role={me.role}/> : undefined;
     const {message} = this.props.error;
     if (message) {
       alert(message);

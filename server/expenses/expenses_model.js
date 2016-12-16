@@ -10,13 +10,20 @@ function getAll(options) {
     .findAll(options);
 }
 
-function deleteById(id) {
+function getAllForUser(owner) {
+  return getAll({
+    where: {owner}
+  });
+}
+
+function findById(id) {
   return expense
-    .destroy({where: {id}});
+    .findOne({where: {id}});
 }
 
 module.exports = {
   insert,
   getAll,
-  deleteById
+  getAllForUser,
+  findById
 };
