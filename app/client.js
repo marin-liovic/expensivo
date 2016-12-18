@@ -16,19 +16,35 @@ import Print from './pages/print';
 
 const app = document.getElementById('app');
 
+function isAuthenticated() {
+  return !!sessionStorage.getItem('token');
+}
+
+function requireAuth(nextState, replaceState) {
+  if (!isAuthenticated()) {
+    replaceState('/')
+  }
+}
+
+function forwardLoggedIn(nextState, replaceState) {
+  if (isAuthenticated()) {
+    replaceState('/expenses')
+  }
+}
+
 ReactDOM.render(
   <Provider store={store}>
   <Router history={hashHistory}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={Welcome}></IndexRoute>
-      <Route path="/signup" component={Signup}></Route>
-      <Route path="/login" component={Login}></Route>
-      <Route path="/expenses" component={Expenses}></Route>
-      <Route path="/expenses/new" component={NewExpense}></Route>
-      <Route path="/expenses/:id/edit" component={EditExpense}></Route>
-      <Route path="/users" component={Users}></Route>
-      <Route path="/users/:id/edit" component={EditUser}></Route>
-      <Route path="/print" component={Print}></Route>
+      <IndexRoute component={Welcome} onEnter={forwardLoggedIn}></IndexRoute>
+      <Route path="/signup" component={Signup} onEnter={forwardLoggedIn}></Route>
+      <Route path="/login" component={Login} onEnter={forwardLoggedIn}></Route>
+      <Route path="/expenses" component={Expenses} onEnter={requireAuth}></Route>
+      <Route path="/expenses/new" component={NewExpense} onEnter={requireAuth}></Route>
+      <Route path="/expenses/:id/edit" component={EditExpense} onEnter={requireAuth}></Route>
+      <Route path="/users" component={Users} onEnter={requireAuth}></Route>
+      <Route path="/users/:id/edit" component={EditUser} onEnter={requireAuth}></Route>
+      <Route path="/print" component={Print} onEnter={requireAuth}></Route>
     </Route>
   </Router>
   </Provider>

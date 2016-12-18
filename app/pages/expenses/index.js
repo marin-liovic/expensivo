@@ -68,9 +68,9 @@ export default class Expenses extends React.Component {
       <table className="table">
         <thead>
           <tr>
-            <th>Time</th>
-            <th>Amount</th>
             <th>Description</th>
+            <th>Amount</th>
+            <th>Time</th>
             <th>Comment</th>
           </tr>
         </thead>

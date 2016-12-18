@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Header from './header';
 import Footer from './footer';
+import Alert from './alert';
+import {dismissAlert} from '../../actions/layout_actions';
 
 @connect((store) => {
   return {
@@ -10,19 +12,23 @@ import Footer from './footer';
   };
 })
 export default class Layout extends React.Component {
+
+  dismissAlert() {
+    this.props.dispatch(dismissAlert());
+  }
+
   render() {
     const component = this.props.children.type.WrappedComponent || {};
-    const {isAuthenticated, me} = this.props.authentication;
-    const header = isAuthenticated && shouldRenderMeta(component) ? <Header role={me.role}/> : undefined;
-    const footer = shouldRenderMeta(component) ? <Footer /> : undefined;
+    const {me} = this.props.authentication;
+    const header = shouldRenderMeta(component) ? <Header role={me.role}/> : undefined;
+    const footer = shouldRenderMeta(component) ? <Footer/> : undefined;
     const {message} = this.props.error;
-    if (message) {
-      alert(message);
-    }
+    const alert = message ? <Alert message={message} onClose={this.dismissAlert.bind(this)}/> : undefined;
 
     return <div>
       {header}
       <div className="container">
+        {alert}
         {this.props.children}
       </div>
       {footer}

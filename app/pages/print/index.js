@@ -33,7 +33,7 @@ export default class Print extends React.Component {
         <tr>
           <th>Week</th>
           <th>Total</th>
-          <th>Average</th>
+          <th>Day average</th>
         </tr>
         </thead>
         <tbody>
@@ -55,7 +55,7 @@ function getWeekData(items) {
     const total = expenses.reduce((sum, expense) => {
       return sum + expense.amount;
     }, 0);
-    const average = total / expenses.length;
+    const average = (total / 7).toFixed(2);
     const start = moment(name, DATE_FORMAT);
     let week = start.format(DATE_FORMAT);
     start.add(6, 'days');

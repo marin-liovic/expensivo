@@ -43,12 +43,12 @@ export default class NewExpense extends React.Component {
     return <div className="col-lg-4 col-lg-offset-4">
       <h1>New Expense</h1>
       <form onSubmit={this.handleSubmit}>
-        <label className="sr-only">Time</label>
-        <input type="datetime" value={this.state.timestamp} onChange={this.changeTimestamp} className="form-control" placeholder="Time" required='true'/>
-        <label className="sr-only">Amount</label>
-        <input type="number" value={this.state.amount} onChange={this.changeAmount} className="form-control" placeholder="Amount" required='true'/>
         <label className="sr-only">Description</label>
         <input type="text" value={this.state.description} onChange={this.changeDescription} className="form-control" placeholder="Description" required='true'/>
+        <label className="sr-only">Amount</label>
+        <input type="number" value={this.state.amount} onChange={this.changeAmount} className="form-control" placeholder="Amount" required='true'/>
+        <label className="sr-only">Time</label>
+        <input type="datetime" value={this.state.timestamp} onChange={this.changeTimestamp} className="form-control" placeholder="Time" required='true'/>
         <label className="sr-only">Comment</label>
         <input type="text" value={this.state.comment} onChange={this.changeComment} className="form-control" placeholder="Comment"/>
         <button className="btn btn-lg btn-primary btn-block" type="submit">Create</button>
