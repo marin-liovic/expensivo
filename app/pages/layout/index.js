@@ -11,8 +11,10 @@ import Footer from './footer';
 })
 export default class Layout extends React.Component {
   render() {
+    const component = this.props.children.type.WrappedComponent || {};
     const {isAuthenticated, me} = this.props.authentication;
-    const header = isAuthenticated ? <Header role={me.role}/> : undefined;
+    const header = isAuthenticated && shouldRenderMeta(component) ? <Header role={me.role}/> : undefined;
+    const footer = shouldRenderMeta(component) ? <Footer /> : undefined;
     const {message} = this.props.error;
     if (message) {
       alert(message);
@@ -23,7 +25,11 @@ export default class Layout extends React.Component {
       <div className="container">
         {this.props.children}
       </div>
-      <Footer />
+      {footer}
     </div>
   }
+}
+
+function shouldRenderMeta(component) {
+  return component.name !== 'Print';
 }

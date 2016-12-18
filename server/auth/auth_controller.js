@@ -3,6 +3,7 @@ const RSVP = require('rsvp');
 const passwordManager = require('../utils/password_manager');
 const user = require('../users/users_model');
 const accessToken = require('./access_token_model');
+const handleError = require('../utils/error_handler').handleError;
 const TOKEN_LENGTH = 16;
 
 function postAccessToken(req, res, next) {
@@ -27,10 +28,11 @@ function postAccessToken(req, res, next) {
         value: crypto.randomBytes(TOKEN_LENGTH).toString('hex')
       })
         .then((data) => {
-          res.json(data.value);
+          res.status(201).json(data.value);
           next();
         });
-    });
+    })
+    .catch(handleError(res));
 }
 
 module.exports = {

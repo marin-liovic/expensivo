@@ -3,6 +3,9 @@ const expenseModel = require('./expenses_model');
 function postExpenses(req, res, next) {
   const {user} = req;
   const {timestamp, description, amount, comment} = req.body;
+  if (!timestamp || !Date.parse(timestamp) || !description || !amount) {
+    return res.status(400).json('"timestamp", "description" and "amount" fields are mandatory.');
+  }
   return expenseModel
     .insert({timestamp, description, amount, comment, owner: user.id})
     .then(() => {
@@ -62,6 +65,9 @@ function putExpense(req, res, next) {
   const {user} = req;
   const {id} = req.params;
   const {timestamp, description, amount, comment} = req.body;
+  if (!timestamp || !Date.parse(timestamp) || !description || !amount) {
+    return res.status(400).json('"timestamp", "description" and "amount" fields are mandatory.');
+  }
   return expenseModel
     .findById(id)
     .then((expense) => {

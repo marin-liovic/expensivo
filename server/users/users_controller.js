@@ -1,5 +1,6 @@
 const userModel = require('./users_model');
 const passwordManager = require('../utils/password_manager');
+const handleError = require('../utils/error_handler').handleError;
 
 function getUsers(req, res, next) {
   return userModel
@@ -8,10 +9,14 @@ function getUsers(req, res, next) {
       res.json(data);
       next();
     })
+    .catch(handleError(res));
 }
 
 function postUsers(req, res, next) {
   const {email, password} = req.body;
+  if (!email || !password) {
+    return res.status(400).json('"email" or "password" field missing.');
+  }
   return passwordManager.hash(password)
     .then(function(hash) {
       return userModel.insert({email, password: hash, role: 'user'})
@@ -20,9 +25,7 @@ function postUsers(req, res, next) {
       res.sendStatus(201);
       next();
     })
-    .catch((error) => {
-      res.status(500).json(error && error.message);
-    });
+    .catch(handleError(res));
 }
 
 function getUser(req, res, next) {
@@ -37,7 +40,8 @@ function getUser(req, res, next) {
       } else {
         res.sendStatus(404);
       }
-    });
+    })
+    .catch(handleError(res));
 }
 
 function authorizeGetUser(data, user) {
@@ -59,7 +63,8 @@ function deleteUser(req, res, next) {
       } else {
         res.sendStatus(404);
       }
-    });
+    })
+    .catch(handleError(res));
 }
 
 function putUser(req, res, next) {
@@ -80,7 +85,8 @@ function putUser(req, res, next) {
       } else {
         res.sendStatus(404);
       }
-    });
+    })
+    .catch(handleError(res));
 }
 
 module.exports = {

@@ -5,7 +5,8 @@ function insert(data) {
     .create(data);
 }
 
-function getAll(options) {
+function getAll(options={}) {
+  options.order = [['timestamp', 'DESC']];
   return expense
     .findAll(options);
 }

@@ -12,6 +12,7 @@ import NewExpense from './pages/new_expense';
 import EditExpense from './pages/edit_expense';
 import Users from './pages/users';
 import EditUser from './pages/edit_user';
+import Print from './pages/print';
 
 const app = document.getElementById('app');
 
@@ -27,6 +28,7 @@ ReactDOM.render(
       <Route path="/expenses/:id/edit" component={EditExpense}></Route>
       <Route path="/users" component={Users}></Route>
       <Route path="/users/:id/edit" component={EditUser}></Route>
+      <Route path="/print" component={Print}></Route>
     </Route>
   </Router>
   </Provider>

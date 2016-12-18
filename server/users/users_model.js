@@ -2,7 +2,7 @@ const user = require('../database').user;
 
 function getAll() {
   return user
-    .findAll();
+    .findAll({attributes: {exclude: ['password']}});
 }
 
 function insert(data) {
@@ -17,7 +17,7 @@ function findByEmail(email) {
 
 function findById(id) {
   return user
-    .findOne({where: {id}});
+    .findOne({where: {id}, attributes: {exclude: ['password']}});
 }
 
 module.exports = {

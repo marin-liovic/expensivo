@@ -1,6 +1,6 @@
 import {getExpenses, postExpenses, deleteExpense, putExpense, getExpense} from './utils/api_client';
 
-export function getAllExpenses(options) {
+export function getAllExpenses(options={}) {
   return {
     type: 'GET_EXPENSES',
     payload: getExpenses(options)

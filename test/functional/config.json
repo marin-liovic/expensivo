@@ -1,0 +1,21 @@
+{
+  "host": "http://localhost:1337",
+  "user": {
+    "id": 52,
+    "email": "test_user@expensivo.com",
+    "password": "test",
+    "accessToken": "33afeb7d6baba5d051194f426bded6ae"
+  },
+  "userManager": {
+    "id": 53,
+    "email": "test_user_manager@expensivo.com",
+    "password": "test",
+    "accessToken": "3bfc2c88663ad47a0bf04613d5397c68"
+  },
+  "admin": {
+    "id": 54,
+    "email": "test_admin@expensivo.com",
+    "password": "test",
+    "accessToken": "dc85db9fc373fdd3d65082b2bef5483b"
+  }
+}
