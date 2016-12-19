@@ -10,7 +10,7 @@ function authorize(roles = []) {
     accessToken
       .findByValue(credentials)
       .then((token) => {
-        if (token) {
+        if (isTokenValid(token)) {
           return user
             .findById(token.owner)
             .then((user) => {
@@ -26,6 +26,10 @@ function authorize(roles = []) {
         }
       })
   }
+}
+
+function isTokenValid(token) {
+  return token && token.expires > new Date();
 }
 
 module.exports = {

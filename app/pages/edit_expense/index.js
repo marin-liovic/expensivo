@@ -75,7 +75,7 @@ export default class EditExpense extends React.Component {
         <label className="sr-only">Description</label>
         <input type="text" value={this.state.description} onChange={this.changeDescription} className="form-control" placeholder="Description" required='true'/>
         <label className="sr-only">Amount</label>
-        <input type="number" value={this.state.amount} onChange={this.changeAmount} className="form-control" placeholder="Amount" required='true'/>
+        <input type="number" step="0.01" min="0.01" value={this.state.amount} onChange={this.changeAmount} className="form-control" placeholder="Amount" required='true'/>
         <DatePicker hintText="Date" value={this.state.date} onChange={this.changeDate}/>
         <TimePicker format="24hr" hintText="Time" value={this.state.time} onChange={this.changeTime}/>
         <label className="sr-only">Comment</label>

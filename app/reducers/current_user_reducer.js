@@ -13,6 +13,14 @@ export default function currentUserReducer(state = initialState, action) {
     case 'GET_CURRENT_USER_FULFILLED':
       state = {...state, item: action.payload};
       break;
+    case 'LOGOUT_FULFILLED':
+      state = {
+        item: {
+          email: '',
+          role: ''
+        }
+      };
+      break;
   }
   return state;
 }

@@ -15,6 +15,16 @@ export default function currentExpenseReducer(state = initialState, action) {
     case 'GET_CURRENT_EXPENSE_FULFILLED':
       state = {...state, item: action.payload};
       break;
+    case 'LOGOUT_FULFILLED':
+      state = {
+        item: {
+          timestamp: '',
+          amount: '',
+          description: '',
+          comment: ''
+        }
+      };
+      break;
   }
   return state;
 }

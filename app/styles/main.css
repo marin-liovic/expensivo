@@ -7,11 +7,15 @@ footer {
     text-align: center;
 }
 
+h1 {
+    margin-bottom: 20px;
+}
+
 .welcome {
     text-align: center;
 }
 
-input {
+.form-control {
     margin: 20px 0;
 }
 
@@ -20,5 +24,9 @@ input {
 }
 
 .btn-print {
+    margin-top: 20px;
+}
+
+.filter {
     margin-top: 20px;
 }

@@ -5,6 +5,8 @@ export default function errorReducer(state = {}, action) {
     };
   } else if (action.type === 'DISMISS_ALERT') {
     state = {};
+  } else if (action.type === 'LOGOUT_FULFILLED') {
+    state = {};
   }
   return state;
 }

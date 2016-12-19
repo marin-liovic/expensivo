@@ -5,6 +5,7 @@ const user = require('../users/users_model');
 const accessToken = require('./access_token_model');
 const handleError = require('../utils/error_handler').handleError;
 const TOKEN_LENGTH = 16;
+const TOKEN_EXPIRATION_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 function postAccessToken(req, res, next) {
   const {email, password} = req.body;
@@ -25,7 +26,8 @@ function postAccessToken(req, res, next) {
       }
       return accessToken.insert({
         owner: hash.user.id,
-        value: crypto.randomBytes(TOKEN_LENGTH).toString('hex')
+        value: crypto.randomBytes(TOKEN_LENGTH).toString('hex'),
+        expires: calculateExpiration()
       })
         .then((data) => {
           res.status(201).json(data.value);
@@ -53,6 +55,10 @@ function deleteAccessToken(req, res, next) {
       }
     })
     .catch(handleError(res));
+}
+
+function calculateExpiration() {
+  return new Date(new Date().getTime() + TOKEN_EXPIRATION_MS);
 }
 
 module.exports = {

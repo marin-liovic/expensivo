@@ -1,3 +1,10 @@
+export function updateDescription(value) {
+  return {
+    type: 'UPDATE_DESCRIPTION',
+    payload: value
+  };
+}
+
 export function updateAmountFrom(value) {
   return {
     type: 'UPDATE_AMOUNT_FROM',

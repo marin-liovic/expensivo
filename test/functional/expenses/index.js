@@ -140,7 +140,7 @@ describe('/expenses', () => {
     });
   });
 
-  describe('DELETE /users/{id}', () => {
+  describe('DELETE /expenses/{id}', () => {
     const {deleteExpense, getExpenses, postExpenses} = apiClient;
     let id1, id2;
 

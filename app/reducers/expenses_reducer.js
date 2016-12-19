@@ -10,6 +10,11 @@ export default function expensesReducer(state = initialState, action) {
     case 'REMOVE_EXPENSE_FULFILLED':
       state = {...state, items: action.payload};
       break;
+    case 'LOGOUT_FULFILLED':
+      state = {
+        items: []
+      };
+      break;
   }
   return state;
 }

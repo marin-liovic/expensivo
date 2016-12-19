@@ -10,6 +10,11 @@ export default function usersReducer(state = initialState, action) {
     case 'REMOVE_USER_FULFILLED':
       state = {...state, items: action.payload};
       break;
+    case 'LOGOUT_FULFILLED':
+      state = {
+        items: []
+      };
+      break;
   }
   return state;
 }

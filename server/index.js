@@ -18,6 +18,9 @@ app.use('/users', users);
 app.use('/expenses', expenses);
 app.use('/me', me);
 app.use('/app', express.static(path.join(__dirname, '../app')));
+app.get('/', function (req, res) {
+  res.redirect('/app');
+});
 
 app.listen(PORT, function () {
   console.log(`Expensivo running on port ${PORT}`);

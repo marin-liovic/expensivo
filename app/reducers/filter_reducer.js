@@ -1,4 +1,5 @@
 const initialState = {
+  description: '',
   amount: {
     from: '',
     to: ''
@@ -23,6 +24,19 @@ export default function filterReducer(state = initialState, action) {
     case 'UPDATE_DATE_TO':
       state = {...state};
       state.date.to = action.payload;
+      break;
+    case 'UPDATE_DESCRIPTION':
+      state = {...state};
+      state.description = action.payload;
+      break;
+    case 'LOGOUT_FULFILLED':
+      state = {
+        amount: {
+          from: '',
+          to: ''
+        },
+        date: {}
+      };
       break;
   }
   return state;

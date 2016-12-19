@@ -13,6 +13,10 @@ module.exports = function (sequelize) {
     value: {
       type: Sequelize.STRING,
       defaultValue: null
+    },
+    expires: {
+      type: Sequelize.DATE,
+      defaultValue: null
     }
   });
 
