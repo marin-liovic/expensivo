@@ -16,12 +16,10 @@ import EditExpense from './pages/edit_expense';
 import Users from './pages/users';
 import EditUser from './pages/edit_user';
 import Print from './pages/print';
+import Logout from './pages/logout';
+import {isAuthenticated} from './utils/auth_utils';
 
 const app = document.getElementById('app');
-
-function isAuthenticated() {
-  return !!sessionStorage.getItem('token');
-}
 
 function requireAuth(nextState, replaceState) {
   if (!isAuthenticated()) {
@@ -35,7 +33,6 @@ function forwardLoggedIn(nextState, replaceState) {
   }
 }
 
-
 ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={store}>
@@ -44,6 +41,7 @@ ReactDOM.render(
           <IndexRoute component={Welcome} onEnter={forwardLoggedIn}></IndexRoute>
           <Route path="/signup" component={Signup} onEnter={forwardLoggedIn}></Route>
           <Route path="/login" component={Login} onEnter={forwardLoggedIn}></Route>
+          <Route path="/logout" component={Logout} onEnter={requireAuth}></Route>
           <Route path="/expenses" component={Expenses} onEnter={requireAuth}></Route>
           <Route path="/expenses/new" component={NewExpense} onEnter={requireAuth}></Route>
           <Route path="/expenses/:id/edit" component={EditExpense} onEnter={requireAuth}></Route>

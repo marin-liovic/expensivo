@@ -31,4 +31,46 @@ describe('/auth', () => {
         });
     });
   });
+
+  describe('DELETE /auth/access_token/{value}', () => {
+    const {deleteAuthAccessToken, postAuthAccessToken} = apiClient;
+    let value;
+
+    before(() => {
+      const body = {email: user.email, password: user.password};
+      return postAuthAccessToken({body})
+        .then((response) => {
+          expect(response).to.have.status(201);
+          value = response.body;
+        });
+    });
+
+    it('should return 401 if not authenticated', () => {
+      return deleteAuthAccessToken({id: value})
+        .then((response) => {
+          expect(response).to.have.status(401);
+        });
+    });
+
+    it('should return 404 if no token to delete', () => {
+      return deleteAuthAccessToken({id: 'foo', auth: 'user'})
+        .then((response) => {
+          expect(response).to.have.status(404);
+        });
+    });
+
+    it('should return 404 if user not owner', () => {
+      return deleteAuthAccessToken({id: value, auth: 'admin'})
+        .then((response) => {
+          expect(response).to.have.status(404);
+        });
+    });
+
+    it('should delete my token', () => {
+      return deleteAuthAccessToken({id: value, auth: 'user'})
+        .then((response) => {
+          expect(response).to.have.status(200);
+        });
+    });
+  });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import groupBy from 'lodash.groupby';
 import moment from 'moment';
 import Expense from '../../components/expense';
 import {getAllExpenses} from '../../actions/expenses_actions';
@@ -65,24 +64,3 @@ export default class Print extends React.Component {
     </div>
   }
 }
-
-// function getWeekData(items) {
-//   const DATE_FORMAT = 'DD.MM.YYYY';
-//   const groupedResults = groupBy(items, function (item) {
-//     return moment(item.timestamp).startOf('isoWeek').format(DATE_FORMAT);
-//   });
-//   const weekNames = Object.keys(groupedResults);
-//   const data = weekNames.map((name) => {
-//     const expenses = groupedResults[name];
-//     const total = expenses.reduce((sum, expense) => {
-//       return sum + expense.amount;
-//     }, 0);
-//     const average = (total / 7).toFixed(2);
-//     const start = moment(name, DATE_FORMAT);
-//     let week = start.format(DATE_FORMAT);
-//     start.add(6, 'days');
-//     week = `${week} - ${start.format(DATE_FORMAT)}`;
-//     return {week, total, average};
-//   });
-//   return data;
-// }

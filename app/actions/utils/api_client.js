@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getToken} from '../../utils/auth_utils';
 
 export function postUsers(data) {
   return request({
@@ -13,6 +14,13 @@ export function postAuthAccessToken(data) {
     data,
     method: 'post',
     url: '/auth/access_token'
+  });
+}
+
+export function deleteAuthAccessToken(token) {
+  return request({
+    method: 'delete',
+    url: `/auth/access_token/${token}`
   });
 }
 
@@ -91,7 +99,7 @@ export function getUser(id) {
 }
 
 function request(options) {
-  options.headers = {authorization:`Bearer ${sessionStorage.getItem('token')}`};
+  options.headers = {authorization:`Bearer ${getToken()}`};
   return axios.request(options)
     .then((request) => {
       return request.data;

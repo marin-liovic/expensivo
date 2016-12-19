@@ -27,20 +27,23 @@ function getLinks(role) {
   if (role === 'user') {
     return [
       <Link to="/expenses">My expenses</Link>,
-      <Link to="/expenses/new">New expense</Link>
+      <Link to="/expenses/new">New expense</Link>,
+      <Link to="/logout">Logout</Link>
     ];
   } else if (role === 'user_manager') {
     return [
       <Link to="/expenses">My expenses</Link>,
       <Link to="/expenses/new">New expense</Link>,
-      <Link to="/users">Users</Link>
+      <Link to="/users">Users</Link>,
+      <Link to="/logout">Logout</Link>
     ];
   } else if (role === 'admin') {
     return [
       <Link to="/expenses">My expenses</Link>,
       <Link to="/expenses/new">New expense</Link>,
       <Link to="/users">Users</Link>,
-      <Link to="/expenses?view=all">All expenses</Link>
+      <Link to="/expenses?view=all">All expenses</Link>,
+      <Link to="/logout">Logout</Link>
     ];
   } else {
     return [];

@@ -9,6 +9,12 @@ function postAuthAccessToken(options={}) {
   return request(options);
 }
 
+function deleteAuthAccessToken(options={}) {
+  options.method = 'delete';
+  options.path = `/auth/access_token/${options.id}`;
+  return request(options);
+}
+
 function getUsers(options={}) {
   options.method = 'get';
   options.path = '/users';
@@ -97,6 +103,7 @@ function addAuth(request, auth, accessToken) {
 
 module.exports = {
   postAuthAccessToken,
+  deleteAuthAccessToken,
   getUsers,
   postUsers,
   getUser,

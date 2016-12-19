@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
+import moment from 'moment';
+const TIME_FORMAT = 'DD.MM.YYYY. HH:mm';
 
 export default class Expense extends React.Component {
   render() {
@@ -14,7 +16,7 @@ export default class Expense extends React.Component {
     return <tr>
       <td>{description}</td>
       <td>{amount}</td>
-      <td>{timestamp}</td>
+      <td>{moment(timestamp).format(TIME_FORMAT)}</td>
       <td>{comment}</td>
       {links}
     </tr>

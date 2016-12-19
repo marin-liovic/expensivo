@@ -35,6 +35,27 @@ function postAccessToken(req, res, next) {
     .catch(handleError(res));
 }
 
+function deleteAccessToken(req, res, next) {
+  const {value} = req.params;
+  const {user} = req;
+  return accessToken
+    .findByValue(value)
+    .then((token) => {
+      if (token && token.owner === user.id) {
+        return token
+          .destroy()
+          .then(() => {
+            res.json(value);
+            next();
+          });
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch(handleError(res));
+}
+
 module.exports = {
-  postAccessToken
+  postAccessToken,
+  deleteAccessToken
 };

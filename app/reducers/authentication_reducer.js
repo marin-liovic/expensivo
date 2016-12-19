@@ -11,6 +11,9 @@ export default function authenticationReducer(state = initialState, action) {
     case 'LOGIN_FULFILLED':
       state = {...state, isAuthenticated: true, me: action.payload};
       break;
+    case 'LOGOUT_FULFILLED':
+      state = {isAuthenticated: false, me: {}};
+      break;
   }
   return state;
 }
