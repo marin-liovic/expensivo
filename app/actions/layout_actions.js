@@ -4,3 +4,12 @@ export function dismissAlert() {
     payload: {}
   };
 }
+
+export function alert(type, message) {
+  return {
+    type: 'ALERT',
+    payload: {
+      type, message
+    }
+  };
+}

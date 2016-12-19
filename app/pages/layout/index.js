@@ -8,7 +8,7 @@ import {dismissAlert} from '../../actions/layout_actions';
 @connect((store) => {
   return {
     authentication: store.authentication,
-    error: store.error
+    alert: store.alert
   };
 })
 export default class Layout extends React.Component {
@@ -22,8 +22,8 @@ export default class Layout extends React.Component {
     const {me} = this.props.authentication;
     const header = shouldRenderMeta(component) ? <Header role={me.role}/> : undefined;
     const footer = shouldRenderMeta(component) ? <Footer/> : undefined;
-    const {message} = this.props.error;
-    const alert = message ? <Alert message={message} onClose={this.dismissAlert.bind(this)}/> : undefined;
+    const {message, type} = this.props.alert;
+    const alert = type ? <Alert message={message} type={type} onClose={this.dismissAlert.bind(this)}/> : undefined;
 
     return <div>
       {header}

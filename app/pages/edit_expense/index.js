@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import {updateExpense, getCurrentExpense} from '../../actions/expenses_actions';
+import {alert} from '../../actions/layout_actions';
 
 @connect((store) => {
   return {
@@ -62,10 +63,14 @@ export default class EditExpense extends React.Component {
 
   handleSubmit() {
     const {date, time} = this.state;
-    const timestamp = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-      time.getHours(), time.getMinutes());
-    const data = {...this.state, id: this.props.currentExpense.item.id, timestamp};
-    this.props.dispatch(updateExpense(data));
+    if (!date.getTime || !time.getTime) {
+      this.props.dispatch(alert('info', 'Date and time are mandatory!'));
+    } else {
+      const timestamp = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+        time.getHours(), time.getMinutes());
+      const data = {...this.state, id: this.props.currentExpense.item.id, timestamp};
+      this.props.dispatch(updateExpense(data));
+    }
   }
 
   render() {
