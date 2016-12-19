@@ -20,9 +20,7 @@ export function getExpenses(options) {
   return request({
     method: 'get',
     url: '/expenses',
-    params: {
-      view: options.view
-    }
+    params: options
   });
 }
 

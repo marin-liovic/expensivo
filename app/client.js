@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import {Provider} from 'react-redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import store from './store';
 import Layout from './pages/layout';
 import Welcome from './pages/welcome';
@@ -32,20 +35,23 @@ function forwardLoggedIn(nextState, replaceState) {
   }
 }
 
+
 ReactDOM.render(
-  <Provider store={store}>
-  <Router history={hashHistory}>
-    <Route path="/" component={Layout}>
-      <IndexRoute component={Welcome} onEnter={forwardLoggedIn}></IndexRoute>
-      <Route path="/signup" component={Signup} onEnter={forwardLoggedIn}></Route>
-      <Route path="/login" component={Login} onEnter={forwardLoggedIn}></Route>
-      <Route path="/expenses" component={Expenses} onEnter={requireAuth}></Route>
-      <Route path="/expenses/new" component={NewExpense} onEnter={requireAuth}></Route>
-      <Route path="/expenses/:id/edit" component={EditExpense} onEnter={requireAuth}></Route>
-      <Route path="/users" component={Users} onEnter={requireAuth}></Route>
-      <Route path="/users/:id/edit" component={EditUser} onEnter={requireAuth}></Route>
-      <Route path="/print" component={Print} onEnter={requireAuth}></Route>
-    </Route>
-  </Router>
-  </Provider>
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <Router history={hashHistory}>
+        <Route path="/" component={Layout}>
+          <IndexRoute component={Welcome} onEnter={forwardLoggedIn}></IndexRoute>
+          <Route path="/signup" component={Signup} onEnter={forwardLoggedIn}></Route>
+          <Route path="/login" component={Login} onEnter={forwardLoggedIn}></Route>
+          <Route path="/expenses" component={Expenses} onEnter={requireAuth}></Route>
+          <Route path="/expenses/new" component={NewExpense} onEnter={requireAuth}></Route>
+          <Route path="/expenses/:id/edit" component={EditExpense} onEnter={requireAuth}></Route>
+          <Route path="/users" component={Users} onEnter={requireAuth}></Route>
+          <Route path="/users/:id/edit" component={EditUser} onEnter={requireAuth}></Route>
+          <Route path="/print" component={Print} onEnter={requireAuth}></Route>
+        </Route>
+      </Router>
+    </Provider>
+  </MuiThemeProvider>
   , app);

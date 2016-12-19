@@ -16,10 +16,10 @@ function postExpenses(req, res, next) {
 
 function getExpenses(req, res, next) {
   const {user} = req;
-  const {view} = req.query;
+  const {view, date_from, date_to} = req.query;
   const getData = (view === 'all' && authorizeGetAll(user))
     ? expenseModel.getAll()
-    : expenseModel.getAllForUser(user.id);
+    : expenseModel.getAllForUser(user.id, {date_from, date_to});
   return getData
     .then((data) => {
       res.json(data);

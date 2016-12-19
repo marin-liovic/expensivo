@@ -11,3 +11,17 @@ export function updateAmountTo(value) {
     payload: value
   };
 }
+
+export function updateDateFrom(value) {
+  return {
+    type: 'UPDATE_DATE_FROM',
+    payload: value
+  };
+}
+
+export function updateDateTo(value) {
+  return {
+    type: 'UPDATE_DATE_TO',
+    payload: value
+  };
+}

@@ -18,3 +18,7 @@ input {
 .navbar-fixed-bottom {
     padding: 15px 0;
 }
+
+.btn-print {
+    margin-top: 20px;
+}

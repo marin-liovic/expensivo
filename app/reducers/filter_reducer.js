@@ -2,7 +2,8 @@ const initialState = {
   amount: {
     from: '',
     to: ''
-  }
+  },
+  date: {}
 };
 
 export default function filterReducer(state = initialState, action) {
@@ -14,6 +15,14 @@ export default function filterReducer(state = initialState, action) {
     case 'UPDATE_AMOUNT_TO':
       state = {...state};
       state.amount.to = action.payload;
+      break;
+    case 'UPDATE_DATE_FROM':
+      state = {...state};
+      state.date.from = action.payload;
+      break;
+    case 'UPDATE_DATE_TO':
+      state = {...state};
+      state.date.to = action.payload;
       break;
   }
   return state;
